@@ -1,18 +1,23 @@
 #ifndef VIBRATOR_H
 #define VIBRATOR_H
 
-#include "Output.h"
+#include "output.h"
+#define verbosVibrator false
 
-#define DIODEPIN 12
+#define VIBPIN 12
 
 
-class VIBRATOR : public Output {
+class Vibrator : public Output {
 public:
-    void virtual setOutputDefinition(char definition[]) {}
+    void setOutputDefinition(char definition[]);
 
-    void virtual executeDefinition() {
-        pinMode(VIBPIN, OUTPUT);
-    }
+    void start();
+
+    void executeStep();
+
+    void turnOn();
+
+    void turnOff();
 };
 
 

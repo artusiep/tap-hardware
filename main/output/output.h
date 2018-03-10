@@ -18,17 +18,11 @@ public:
 
     void virtual executeStep();
 
-    void updateTime() {
-        this->currentMillis = millis();
-    }
+    void updateTime(); 
 
-    void makeStep() {
-        this->state++;
-    }
+    void makeStep();
 
-    void reset() {
-        this->state = 0;
-    }
+    void reset();
 };
 
 #endif
