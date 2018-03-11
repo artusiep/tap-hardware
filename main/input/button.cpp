@@ -20,11 +20,13 @@ void Button::click() {
 
 void Button::handle() {
     this->updateTime();
-    if(this->state == 1 and (this->currentMillis - this->previousMillis >= this->timeToElapse)) {
-        Serial.print("One click");
+    if (this->state == 1 and (this->currentMillis - this->previousMillis >= this->timeToElapse)) {
+        Serial.print("One click\n");
+        bleSerial.print("1");
         this->state = 0;
     } else if (this->state == 2) {
-        Serial.print("Two clicks");
+        Serial.print("Two clicks\n");
+        bleSerial.print("2");
         this->state = 0;
     }
 }

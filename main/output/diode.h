@@ -2,8 +2,8 @@
 #define DIODE_H
 
 #include "output.cpp"
-#define verboseDiode false
 
+#define verboseDiode false
 
 #define DIODEPIN 13
 

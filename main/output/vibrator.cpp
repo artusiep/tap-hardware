@@ -1,5 +1,4 @@
 #include "vibrator.h"
-
 void Vibrator::setOutputDefinition(char definition[]) {}
 
 void Vibrator::start() {

@@ -6,9 +6,10 @@
 #define TAP_HARDWARE_BUTTON_H
 
 #include "Arduino.h"
+
 #define interruptPin 2
 
-class Button{
+class Button {
 private:
     int pin = interruptPin;
     int state = 0;
@@ -17,8 +18,11 @@ private:
     unsigned long timeToElapse = 2000;
 public:
     Button();
+
     void click();
+
     void handle();
+
     void updateTime();
 };
 

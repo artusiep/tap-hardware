@@ -1,18 +1,23 @@
 #ifndef BUZZER_H
 #define BUZZER_H
 
-#include "Output.h"
+#include "output.h"
+
+#define verboseBuzzer false
 
 #define BUZZERPIN 11
 
 class Buzzer : public Output {
 public:
-    void virtual setOutputDefinition(char definition[]) {}
+    void setOutputDefinition(char definition[]);
 
-    void virtual executeDefinition() {
+    void start();
 
-    }
+    void executeStep();
+
+    void turnOn();
+
+    void turnOff();
 };
-
 
 #endif

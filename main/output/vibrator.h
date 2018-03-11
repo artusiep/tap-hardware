@@ -2,10 +2,10 @@
 #define VIBRATOR_H
 
 #include "output.h"
+
 #define verbosVibrator false
 
 #define VIBPIN 12
-
 
 class Vibrator : public Output {
 public:

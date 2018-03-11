@@ -12,7 +12,7 @@ void Diode::start() {
 
 void Diode::executeStep() {
     this->updateTime();
-    if(verboseDiode){
+    if (verboseDiode) {
         Serial.print("\nCurrent: ");
         Serial.print(this->currentMillis);
         Serial.print("\nPrevious: ");

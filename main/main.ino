@@ -2,23 +2,28 @@
 
 #include <SoftwareSerial.h>
 #include "output\diode.cpp"
+#include "output\buzzer.cpp"
 #include "output\vibrator.cpp"
-#include "input\button.cpp"
+
 #define rxPin 8
 #define txPin 7
+SoftwareSerial bleSerial = SoftwareSerial(rxPin, txPin);
+
+#include "input\button.cpp"
+
 #define interruptPin 2
 
 
-SoftwareSerial bleSerial = SoftwareSerial(rxPin, txPin);
 String data = "";
 Diode diode;
 Vibrator vibrator;
 Button button;
-
+Buzzer buzzer;
 
 void setup() {
     pinMode(DIODEPIN, OUTPUT);
     pinMode(VIBPIN, OUTPUT);
+    pinMode(BUZZERPIN, OUTPUT);
     pinMode(interruptPin, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(interruptPin), click, RISING);
     bleSerial.begin(9600);
@@ -26,16 +31,14 @@ void setup() {
 }
 
 void loop() {
-    //button.checkIfPushed();
     if (bleSerial.available()) {
         data = bleRecieveData();
         if (data == "1" and diode.state == 0) {
             if (verbose) { Serial.print("Pinging\n"); }
-            diode.start();
-            vibrator.start();
+            outputsStart();
         }
     }
-    executeSteps();
+    outputsSteps();
     button.handle();
 }
 
@@ -52,7 +55,14 @@ void click() {
     button.click();
 }
 
-void executeSteps() {
+void outputsStart() {
+    diode.start();
+    vibrator.start();
+    buzzer.start();
+}
+
+void outputsSteps() {
+    buzzer.executeStep();
     diode.executeStep();
     vibrator.executeStep();
 }
