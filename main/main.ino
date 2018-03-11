@@ -3,25 +3,30 @@
 #include <SoftwareSerial.h>
 #include "output\diode.cpp"
 #include "output\vibrator.cpp"
-#define interruptPin 2
+#include "input\button.cpp"
 #define rxPin 8
 #define txPin 7
+#define interruptPin 2
+
 
 SoftwareSerial bleSerial = SoftwareSerial(rxPin, txPin);
 String data = "";
 Diode diode;
 Vibrator vibrator;
+Button button;
+
 
 void setup() {
     pinMode(DIODEPIN, OUTPUT);
     pinMode(VIBPIN, OUTPUT);
     pinMode(interruptPin, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(interruptPin), diodestart, HIGH);
+    attachInterrupt(digitalPinToInterrupt(interruptPin), click, RISING);
     bleSerial.begin(9600);
     Serial.begin(9600);
 }
 
 void loop() {
+    //button.checkIfPushed();
     if (bleSerial.available()) {
         data = bleRecieveData();
         if (data == "1" and diode.state == 0) {
@@ -30,8 +35,8 @@ void loop() {
             vibrator.start();
         }
     }
-
     executeSteps();
+    button.handle();
 }
 
 char bleRecieveData() {
@@ -43,8 +48,8 @@ char bleRecieveData() {
     return data;
 }
 
-void diodestart() {
-    diode.start();
+void click() {
+    button.click();
 }
 
 void executeSteps() {
