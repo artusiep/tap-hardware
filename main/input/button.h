@@ -4,20 +4,27 @@
 
 #ifndef TAP_HARDWARE_BUTTON_H
 #define TAP_HARDWARE_BUTTON_H
-
 #include "Arduino.h"
+#include <BLEPeripheral.h>
+
 
 #define interruptPin 2
 
 class Button {
 private:
     int pin = interruptPin;
+public:
     int state = 0;
     unsigned long previousMillis = 0;
     unsigned long currentMillis = 0;
     unsigned long timeToElapse = 2000;
-public:
-    Button();
+    int getState() {
+        return state;
+    }
+
+    void setState(int state) {
+        this->state = state;
+    }
 
     void click();
 
