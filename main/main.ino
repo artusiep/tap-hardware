@@ -13,6 +13,7 @@ SoftwareSerial bleSerial = SoftwareSerial(rxPin, txPin);
 #include "input\button.cpp"
 
 #define interruptPin 2
+#define connectionPin 10
 
 
 String data = "";
@@ -22,6 +23,7 @@ Button button;
 Buzzer buzzer;
 
 void setup() {
+    pinMode(connectionPin, OUTPUT);
     pinMode(DIODEPIN, OUTPUT);
     pinMode(VIBPIN, OUTPUT);
     pinMode(BUZZERPIN, OUTPUT);
@@ -48,6 +50,11 @@ char bleRecieveData() {
     if (verbose) {
         Serial.print(data);
         Serial.print("\n");
+    }
+    if (data == 'N') {
+        digitalWrite(connectionPin, HIGH);
+    } else if (data == 'L') {
+        digitalWrite(connectionPin, LOW);
     }
     return data;
 }
