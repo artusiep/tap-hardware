@@ -5,7 +5,6 @@
 #ifndef TAP_HARDWARE_BUTTON_H
 #define TAP_HARDWARE_BUTTON_H
 #include "Arduino.h"
-#include <BLEPeripheral.h>
 
 
 #define interruptPin 2
